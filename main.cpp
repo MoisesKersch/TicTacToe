@@ -13,14 +13,15 @@ void draw()
     {
         for (int y=0; y<3; y++)
         {
-            cout << canvas[x][y];
+            cout << " " << canvas[x][y];
 
         }
         cout << "\n";
     }
-
 }
 
 int main()
 {
+    draw();
+
 }
