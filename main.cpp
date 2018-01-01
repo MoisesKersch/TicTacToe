@@ -3,9 +3,9 @@
 
 using namespace std;
 
-char canvas[3][3] = {{'X','0','0'},
+char canvas[3][3] = {{'0','0','0'},
                      {'0','0','0'},
-                     {'0','0','0'}};
+                     {'0','0','O'}};
 
 int a = 0;
 int b = 0;
@@ -30,13 +30,7 @@ bool logic();
 
 int main()
 {
-
-    cout << logic() << endl;
-    cout << logic() << endl;
-    cout << logic() << endl;
-
-
-
+    play();
 }
 
 void display()
@@ -58,88 +52,34 @@ void update(int x, int y, char input)
 
 bool logic()
 {
-    for (int x=0; x<3; x++)
+    int xcounter, ocounter;
+    for(int x=0; x<3; x++)
     {
-        for (int y=0; y<3; y++)
+        xcounter = 0;
+        ocounter = 0;
+        for(int y=0; y<3; y++)
         {
-            // 1 line
-            if (x == 0 && canvas[x][y] == 'X')
-            {
-                a++;
-                cout << "a: " << a << endl;
-            }
-            if (x == 0 && canvas[x][y] == 'O')
-            {
-                b++;
-            }
-            // 2 line
-            if (x == 1 && canvas[x][y] == 'X')
-            {
-                c++;
-            }
-            if (x == 1 && canvas[x][y] == 'O')
-            {
-                d++;
-            }
-            // 3 line
-            if (x == 2 && canvas[x][y] == 'X')
-            {
-                e++;
-            }
-            if (x == 2 && canvas[x][y] == 'O')
-            {
-                f++;
-            }
-
-
-            // 1 column
-            if (y == 0 && canvas[x][y] == 'X')
-            {
-                g++;
-            }
-            if (y == 0 && canvas[x][y] == 'O')
-            {
-                h++;
-            }
-            // 2 column
-            if (y == 1 && canvas[x][y] == 'X')
-            {
-                i++;
-            }
-            if (y == 1 && canvas[x][y] == 'O')
-            {
-                j++;
-            }
-            // 3 column
-            if (y == 2 && canvas[x][y] == 'X')
-            {
-                k++;
-            }
-            if (y == 2 && canvas[x][y] == 'O')
-            {
-                l++;
-            }
-
-            // right line
-            if (x == y && canvas[x][y] == 'X')
-            {
-                m++;
-            }
-            if (x == y && canvas[x][y] == 'O')
-            {
-                n++;
-            }
+            if(canvas[x][y] == 'X')
+                xcounter++;
+            if(canvas[x][y] == 'O')
+                ocounter++;
         }
+
+        if (xcounter == 3)
+        {
+            return true;
+        }
+        else if (ocounter == 3)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
-    //cout << a << b << c << d << e << f << g << h << i << j << k << l << m << n << endl;
-    if (a == 3 || b == 3 || c == 3 || d == 3 || e == 3 || f == 3 || g == 3 || h == 3 || i == 3 || j == 3 || l == 3 || k == 3 || m == 3 || n == 3)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+
 }
 
 void play()
@@ -149,7 +89,7 @@ void play()
 
     int i = 0;
 
-    while (i < 9)
+    while (i < 9 and !logic())
     {
         display();
         cout << "Enter the coordinates: ";
@@ -167,6 +107,6 @@ void play()
                 update(--x, --y, 'O');
             }
         }
-        // cls;
+        cls;
     }
 }
